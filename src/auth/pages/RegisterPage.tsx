@@ -30,7 +30,7 @@ export const RegisterPage = () => {
   const isCheckingAuthentication = useMemo(() => status === 'checking', [status]);
 
   return (
-    <AuthLayout title="Crear cuenta">
+    <AuthLayout title="create account">
       <form onSubmit={onSubmit}>
         <div className="w-full max-w-md mx-auto">
           
@@ -38,14 +38,14 @@ export const RegisterPage = () => {
           <div className="mb-4">
             <input
               {...register('displayName', {
-                required: 'Este campo es requerido',
+                required: 'This field is required',
                 minLength: {
                   value: 2,
-                  message: 'El nombre debe tener al menos 2 caracteres'
+                  message: 'The name must have at least 2 characters'
                 }
               })}
               type="text"
-              placeholder="Nombre completo"
+              placeholder="full name"
               className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-zinc-800"
             />
             {errors.displayName && (
@@ -57,14 +57,14 @@ export const RegisterPage = () => {
           <div className="mb-4">
             <input
               {...register('email', {
-                required: 'Este campo es requerido',
+                required: 'This field is required',
                 pattern: {
                   value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: 'Ingrese un correo válido',
+                  message: 'Enter a valid email',
                 },
               })}
               type="email"
-              placeholder="correo@google.com"
+              placeholder="email@email.com"
               className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-zinc-800"
             />
             {errors.email && (
@@ -76,14 +76,14 @@ export const RegisterPage = () => {
           <div className="mb-4">
             <input
               {...register('password', {
-                required: 'Este campo es requerido',
+                required: 'This field is required',
                 minLength: {
                   value: 6,
-                  message: 'La contraseña debe tener al menos 6 caracteres',
+                  message: 'The password must have at least 6 characters',
                 },
               })}
               type="password"
-              placeholder="Contraseña"
+              placeholder="password"
               className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-zinc-800"
             />
             {errors.password && (
@@ -102,21 +102,21 @@ export const RegisterPage = () => {
           <div className="mb-4">
             <button
               type="submit"
-              className="w-full px-4 py-2 bg-zinc-800 text-white rounded-sm hover:bg-zinc-900 focus:outline-none transition-colors"
+              className="w-full px-4 py-2 bg-zinc-800 text-white rounded-sm hover:bg-zinc-900 focus:outline-none transition-colors font-bold"
               disabled={ isCheckingAuthentication }
             >
-              Crear cuenta
+              create account
             </button>
           </div>
 
           {/* Login Link */}
-          <div className="text-right">
-            <span className="text-gray-600 mr-2">¿Ya tienes cuenta?</span>
+          <div className="flex items-center justify-end">
+            <span className="text-gray-600 mr-2">already have an account?</span>
             <Link
               to="/auth/login"
               className="text-gray-600 hover:underline"
             >
-              Ingresar
+              login
             </Link>
           </div>
 

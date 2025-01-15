@@ -9,7 +9,9 @@ export interface LoginUserProps {
     password: string;
 }
 
-
+export interface ForgotPasswordForm {
+    email: string;
+}
 
 export interface ErrorResponse {
     ok: boolean;

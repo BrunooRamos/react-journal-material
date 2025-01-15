@@ -38,7 +38,7 @@ export const LoginPage = () => {
   const isCheckingAuthentication = useMemo(() => status === 'checking', [status]); 
 
   return (
-    <AuthLayout title="Login">
+    <AuthLayout title="login">
       <form onSubmit={onSubmit} className="w-full max-w-md mx-auto">
         <div className="w-full max-w-md mx-auto">
 
@@ -46,15 +46,15 @@ export const LoginPage = () => {
           <div className="mb-4">
             <input
               {...register('email', {
-                required: 'Este campo es requerido',
+                required: 'This field is required',
                 pattern: {
                   value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: 'Ingrese un correo válido',
+                  message: 'Enter a valid email',
                 },
               })}
               type="email"
               name="email"
-              placeholder="correo@google.com"
+              placeholder="email@email.com"
               className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-zinc-800"
             />
             {errors.email && (
@@ -67,15 +67,15 @@ export const LoginPage = () => {
           <div className="mb-4">
             <input
               {...register('password', {
-                required: 'Este campo es requerido',
+                required: 'This field is required',
                 minLength: {
                   value: 6,
-                  message: 'La contraseña debe tener al menos 6 caracteres',
+                  message: 'The password must have at least 6 characters',
                 },
               })}
               type="password"
               name="password"
-              placeholder="Contraseña"
+              placeholder="password"
               className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-zinc-800"
             />
             {errors.password && (
@@ -100,7 +100,7 @@ export const LoginPage = () => {
                 className="w-full px-4 py-2 bg-zinc-800 text-white rounded-sm hover:bg-zinc-900 focus:outline-none transition-colors"
                 disabled={ isCheckingAuthentication }
               >
-                Login
+                login
               </button>
             </div>
 
@@ -116,18 +116,25 @@ export const LoginPage = () => {
                   alt="Google"
                   className="w-5 h-5 mr-2"
                 />
-                <span>Google</span>
+                <span>google</span>
               </button>
 
             </div>
           </div>
 
-          <div className="text-right">
+          {/* Links container */}
+          <div className="flex justify-between items-center">
+            <Link
+              to="/auth/forgot-password"
+              className="text-gray-600 hover:underline"
+            >
+              forgot password?
+            </Link>
             <Link
               to="/auth/register"
               className="text-gray-600 hover:underline"
             >
-              Crear una cuenta
+              create account
             </Link>
           </div>
 

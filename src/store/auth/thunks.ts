@@ -1,5 +1,5 @@
-import { loginUserWithEmailPassword, logoutFirebase, registerUserWithEmailPassword, signInWithGoogle } from '../../auth/firebase/providers';
-import { LoginUserProps, RegisterUserProps } from '../../auth/interfaces';
+import { loginUserWithEmailPassword, logoutFirebase, registerUserWithEmailPassword, resetPasswordWithEmail, signInWithGoogle } from '../../auth/firebase/providers';
+import { ForgotPasswordForm, LoginUserProps, RegisterUserProps } from '../../auth/interfaces';
 import { AppDispatch } from '../store';
 import { onCheckingCredentials, onLogin, onLogout } from './authSlice';
 
@@ -44,6 +44,13 @@ export const startLoginWithEmailPassword = ({ email, password }: LoginUserProps)
         if ( !result.ok ) return dispatch( onLogout( result ) );
 
         dispatch( onLogin( result ) );
+    }
+}
+
+
+export const startResetPasswordWithEmail = ({ email }: ForgotPasswordForm) => {
+    return async ( dispatch: AppDispatch ) => {
+        await resetPasswordWithEmail( email );
     }
 }
 

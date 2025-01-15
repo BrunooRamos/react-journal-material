@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
 import { LoginUserProps, RegisterUserProps } from '../interfaces';
 import { FirebaseAuth } from './config';
 import { refactorErrorAuthMessages } from '../../helpers';
@@ -61,6 +61,26 @@ export const loginUserWithEmailPassword = async ({ email, password }: LoginUserP
             ok: true,
             displayName, photoURL, uid
         }
+    } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = refactorErrorAuthMessages( errorCode );
+
+        return {
+            ok: false,
+            errorMessage,
+            errorCode
+        }
+    }
+}
+
+export const resetPasswordWithEmail = async (email: string) => {
+    try {
+        await sendPasswordResetEmail( FirebaseAuth, email );
+
+        return {
+            ok: true
+        }
+
     } catch (error) {
         const errorCode = error.code;
         const errorMessage = refactorErrorAuthMessages( errorCode );

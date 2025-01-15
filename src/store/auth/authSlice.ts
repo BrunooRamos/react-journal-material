@@ -9,6 +9,7 @@ export const authSlice = createSlice({
         displayName: null,
         photoURL: null,
         errorMessage: null,
+        resetPasswordCountdown: 0,
     },
     reducers: {
         onLogin: ( state, { payload } ) => {
@@ -29,10 +30,13 @@ export const authSlice = createSlice({
         },
         onCheckingCredentials: (state) => {
             state.status = 'checking';
+        },
+        setResetPasswordCountdown: (state, { payload }) => {
+            state.resetPasswordCountdown = payload;
         }
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { onLogin, onLogout, onCheckingCredentials } = authSlice.actions;
+export const { onLogin, onLogout, onCheckingCredentials, setResetPasswordCountdown } = authSlice.actions;
