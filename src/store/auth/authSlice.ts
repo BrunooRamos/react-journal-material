@@ -1,43 +1,38 @@
-
-import { createSlice } from '@reduxjs/toolkit'
-
-interface AuthState {
-    status: AuthStatus
-    uid: string | null
-    email: string | null
-    displayName: string | null
-    photoURL: string | null
-    errorMessage: string | null
-}
-
-enum AuthStatus {
-    checking = 'checking',
-    notAuthenticated = 'not-authenticated',
-    authenticated = 'authenticated'
-}
-
-const initialState: AuthState = {
-    status: AuthStatus.checking,
-    uid: null,
-    email: null,
-    displayName: null,
-    photoURL: null,
-    errorMessage: null,
-}
+import { createSlice } from '@reduxjs/toolkit';
 
 export const authSlice = createSlice({
-  name: 'auth',
-  initialState,
-  reducers: {
-    login: (state, action) => {}, 
+    name: 'auth',
+    initialState: {
+        status: 'checking', // 'checking', 'not-authenticated', 'authenticated'
+        uid: null,
+        email: null,
+        displayName: null,
+        photoURL: null,
+        errorMessage: null,
+    },
+    reducers: {
+        onLogin: ( state, { payload } ) => {
+            state.status = 'authenticated', // 'checking', 'not-authenticated', 'authenticated'
+            state.uid = payload.uid;
+            state.email = payload.email;
+            state.displayName = payload.displayName;
+            state.photoURL = payload.photoURL;
+            state.errorMessage = null;
+        },
+        onLogout: ( state, { payload } ) => {
+            state.status = 'not-authenticated', // 'checking', 'not-authenticated', 'authenticated'
+            state.uid = null;
+            state.email = null;
+            state.displayName = null;
+            state.photoURL = null;
+            state.errorMessage = payload?.errorMessage || null;
+        },
+        onCheckingCredentials: (state) => {
+            state.status = 'checking';
+        }
+    }
+});
 
-    logout: (state, action) => {},
 
-    checkingCredentials: (state, action) => {}
-  },
-})
-
-// Exportamos las acciones, para que puedan ser usadas en el componente
-export const { login, logout, checkingCredentials } = authSlice.actions
-
-export default authSlice.reducer
+// Action creators are generated for each case reducer function
+export const { onLogin, onLogout, onCheckingCredentials } = authSlice.actions;
